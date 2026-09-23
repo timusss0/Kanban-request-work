@@ -1,13 +1,13 @@
 {
-  "name": "papan-request",
+  "name": "board-request",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-  "start": "node local-server.js",
-  // "dev": "node --env-file-if-exists=.env local-server.js",
-  "build": "echo \"no build step\""
-},
+    "start": "node local-server.js",
+    "dev": "node --env-file-if-exists=.env local-server.js",
+    "build": "echo \"no build step\""
+  },
   "dependencies": {
     "mysql2": "^3.24.4"
   }

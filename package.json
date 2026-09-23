@@ -4,9 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-     "dev": "node --env-file-if-exists=.env local-server.js",
-  "start": "node local-server.js"
-  },
+  "start": "node local-server.js",
+  "dev": "node --env-file-if-exists=.env local-server.js",
+  "build": "echo \"no build step\""
+},
   "dependencies": {
     "mysql2": "^3.24.4"
   }

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Website Request Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Website Request Board</h1>
+      <p class="lede">Submit a feature request or website fix.</p>
+    </div>
+    <button type="button" class="btn btn-primary" id="btnNew">+ New request</button>
+  </header>
+
+  <main class="board">
+    <section class="column" data-status="todo" aria-labelledby="col-todo">
+      <header class="column-head">
+        <h2 id="col-todo">To do</h2>
+        <span class="count" data-count="todo">0</span>
+      </header>
+      <div class="dropzone" data-status="todo"></div>
+    </section>
+
+    <section class="column" data-status="progress" aria-labelledby="col-progress">
+      <header class="column-head">
+        <h2 id="col-progress">In progress</h2>
+        <span class="count" data-count="progress">0</span>
+      </header>
+      <div class="dropzone" data-status="progress"></div>
+    </section>
+
+    <section class="column" data-status="done" aria-labelledby="col-done">
+      <header class="column-head">
+        <h2 id="col-done">Done</h2>
+        <span class="count" data-count="done">0</span>
+      </header>
+      <div class="dropzone" data-status="done"></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Create / edit request form -->
+  <dialog id="ticketDialog" aria-labelledby="dialogTitle">
+    <form id="ticketForm" novalidate>
+      <h2 id="dialogTitle">New request</h2>
+
+      <label class="field">
+        <span>Request title</span>
+        <input name="title" maxlength="150" required placeholder="Example: Add WhatsApp button to product page">
+      </label>
+
+      <label class="field">
+        <span>Details <small>(optional)</small></span>
+        <textarea name="description" rows="4" maxlength="5000" placeholder="Describe what you want, which page, reference examples, etc."></textarea>
+      </label>
+
+      <div class="field-row">
+        <label class="field">
+          <span>Priority</span>
+          <select name="priority">
+            <option value="high">High</option>
+            <option value="medium" selected>Normal</option>
+            <option value="low">Low</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Deadline <small>(optional)</small></span>
+          <input type="date" name="deadline">
+        </label>
+      </div>
+
+      <div class="field-row">
+        <label class="field">
+          <span>Requested by</span>
+          <input name="requested_by" maxlength="60" value="Boss">
+        </label>
+        <label class="field edit-only">
+          <span>Status</span>
+          <select name="status">
+            <option value="todo">To do</option>
+            <option value="progress">In progress</option>
+            <option value="done">Done</option>
+          </select>
+        </label>
+      </div>
+
+      <p class="form-error" id="formError" role="alert"></p>
+
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-danger edit-only" id="btnDelete">Delete</button>
+        <span class="spacer"></span>
+        <button type="button" class="btn btn-ghost" id="btnCancel">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="btnSave">Submit request</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Access code -->
+  <dialog id="loginDialog" aria-labelledby="loginTitle">
+    <form id="loginForm">
+      <h2 id="loginTitle">Enter access code</h2>
+      <p class="hint">This code is required so only the team can view and edit the board.</p>
+      <label class="field">
+        <span>Access code</span>
+        <input type="password" name="key" required autocomplete="current-password">
+      </label>
+      <div class="dialog-actions">
+        <span class="spacer"></span>
+        <button type="submit" class="btn btn-primary">Open board</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

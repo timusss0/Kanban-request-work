@@ -1,0 +1,12 @@
+{
+  "name": "papan-request",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file=.env local-server.js"
+  },
+  "dependencies": {
+    "mysql2": "^3.24.4"
+  }
+}

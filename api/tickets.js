@@ -109,9 +109,12 @@ export default async function handler(req, res) {
 
         const sets = fields.map((f) => `${f} = ?`);
         const values = fields.map((f) => data[f]);
-        if ('status' in data) {
-          sets.push("done_at = CASE WHEN ? = 'done' THEN COALESCE(done_at, CURRENT_TIMESTAMP) ELSE NULL END");
-          values.push(data.status);
+       if ('status' in data) {
+          sets.push(
+            data.status === 'done'
+              ? 'done_at = COALESCE(done_at, CURRENT_TIMESTAMP)'
+              : 'done_at = NULL'
+          );
         }
 
         await db.execute(`UPDATE tickets SET ${sets.join(', ')} WHERE id = ?`, [...values, id]);

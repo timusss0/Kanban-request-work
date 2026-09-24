@@ -131,12 +131,8 @@ export default async function handler(req, res) {
         res.setHeader('Allow', 'GET, POST, PATCH, DELETE');
         return res.status(405).json({ error: 'Method not supported.' });
     }
-   } catch (err) {
+    } catch (err) {
     console.error(err);
-    return res.status(500).json({
-      error: 'Failed to access the database.',
-      code: err.code,
-      detail: err.message,
-    });
+    return res.status(500).json({ error: 'Failed to access the database.' });
   }
 }

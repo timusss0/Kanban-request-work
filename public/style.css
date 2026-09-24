@@ -14,7 +14,8 @@
   --body: "IBM Plex Sans", system-ui, sans-serif;
 }
 
-* { box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 
 body {
   margin: 0;
@@ -239,6 +240,7 @@ dialog {
   padding: 0;
   color: var(--ink);
   box-shadow: 0 24px 60px rgb(27 37 51 / .25);
+  margin: auto;
 }
 dialog::backdrop { background: rgb(27 37 51 / .45); }
 dialog[open] { animation: pop .16s ease-out; }

@@ -3,13 +3,10 @@
 import http from 'node:http';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import handler from './api/tickets.js';
 
 const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
-});
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -29,7 +26,8 @@ const TYPES = {
   '.woff2': 'font/woff2',
 };
 
-const root = path.resolve('public');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const root = path.join(__dirname, 'public');
 
 http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
@@ -71,4 +69,4 @@ http.createServer(async (req, res) => {
   } catch {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' }).end('Not found');
   }
-}).listen(PORT, () => console.log(`Open http://localhost:${PORT}`));
+}).listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));
